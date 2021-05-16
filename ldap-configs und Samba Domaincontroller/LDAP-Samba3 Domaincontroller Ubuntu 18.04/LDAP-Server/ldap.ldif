@@ -1,0 +1,7 @@
+# before|||02.03.09|||olli|||OpenLDAP|||LDAP DNs for basic structure. Insert this file with <pre>ldapadd -x -D cn$
+# after
+# Base DN
+dn: dc=supertux,dc=lan
+#dc: tux.local
+objectClass: top
+objectClass: domain

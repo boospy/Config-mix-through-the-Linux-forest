@@ -1,0 +1,28 @@
+suffix                  "dc=supertux,dc=lan"
+bind_policy             soft
+ldap_version 3
+nss_base_group          ou=usergroups,ou=group,ou=wiki-deepdoc,ou=wifi,ou=opensource-it,ou=messaging,ou=webhosting,dc=supertux,dc=lan
+nss_base_hosts          ou=machines,dc=supertux,dc=lan
+nss_base_passwd         ou=users,ou=people,ou=wiki-deepdoc,ou=wifi,ou=opensource-it,ou=messaging,ou=webhosting,dc=supertux,dc=lan
+nss_base_shadow         ou=users,ou=people,ou=wiki-deepdoc,ou=wifi,ou=opensource-it,ou=messaging,ou=webhosting,dc=supertux,dc=lan
+sudoers_base            ou=SUDOers,ou=Anwendungen,dc=supertux,dc=lan
+pam_filter              objectclass=posixAccount
+pam_filter              |(host=itmgmt)(host=\*)
+pam_check_host_attr     yes
+pam_login_attribute     uid
+pam_member_attribute    memberUid
+pam_password            exop
+timelimit 20
+uri                     ldap://itmgmt.supertux.lan ldap://web2.supertux.lan ldap://box.supertux.lan
+ssl                     start_tls
+nss_reconnect_tries 4                   # number of times to double the sleep time
+nss_reconnect_sleeptime 1               # initial sleep value
+nss_reconnect_maxsleeptime 16   # max sleep value to cap at
+nss_reconnect_maxconntries 2    # how many tries before sleeping
+tls_checkpeer yes
+tls_cacertfile /etc/ldap/ssl/01cacert.pem
+
+base dc=supertux,dc=lan
+
+nss_initgroups_ignoreusers #_apt,avahi,avahi-autoipd,backup,backuppc,bin,colord,daemon,dnsmasq,games,gdm,gnats,home,hplip,irc,kernoops,landscape,libuuid,libvirt-dnsmasq,libvirt-qemu,lightdm,list,lp,mail,man,mediatomb,messagebus,minidlna,mysql,nagios,news,ntp,openldap,portage,postfix,proxy,pulse,puppet,root,rtkit,saned,speech-dispatcher,sshd,statd,sync,sys,syslog,systemd-bus-proxy,systemd-network,systemd-resolve,systemd-timesync,usbmux,uucp,uuidd,whoopsie,www-data
+

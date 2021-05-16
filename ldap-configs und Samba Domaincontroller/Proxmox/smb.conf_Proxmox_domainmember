@@ -1,0 +1,70 @@
+[global]
+
+   workgroup = SUPERTUX
+   server string = ZFS-Storage
+   dns proxy = no
+   security = domain
+   netbios name = virtu01
+   log file = /var/log/samba/log.%m
+   max log size = 1000
+   panic action = /usr/share/samba/panic-action %d
+   server role = standalone server
+   passdb backend = tdbsam
+   obey pam restrictions = yes
+   unix password sync = yes
+   passwd program = /usr/bin/passwd %u
+   passwd chat = *Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .
+   pam password change = yes
+   #map to guest = bad user
+   #usershare allow guests = yes
+   invalid users = root
+   unix extensions = yes
+#======================= Share Definitions =======================
+
+[homes]
+   path = /home/%U
+   browseable = no
+   valid users = %S
+   read only = no
+   create mask = 0664
+   directory mask = 0775
+
+[public]
+   comment = Public Stuff
+   directory mode = 777
+   path = /home/public
+   create mode = 666
+   writable = yes
+   public = yes
+   browseable = yes
+   guest ok = yes
+#   write list = @ldapbenutzer
+
+[steamwindows]
+        write list = loma
+        comment = Steam Speicher Windows
+        directory mode = 777
+        path = /ssd-pool/steamwindows
+        create mode = 777
+        writeable = yes
+
+
+
+[Downloads]
+	path = /v-machines/Downloads
+	comment = Downloads
+	directory mode = 777
+	create mode = 666
+	writeable = yes
+	write list = @ldapbenutzer
+
+[ISO-Images]
+	path = /v-machines/home/iso-images/template/iso
+	comment = ISO's
+	directory mode = 777
+	create mode = 666
+	writeable = yes
+	write list = @iso-images
+
+
+
